@@ -26,7 +26,7 @@ This project transforms CCEL into a living conversation by integrating two disti
 ## Deployment
 
 This website is deployed using GitHub Pages and is accessible at:
-[https://[your-username].github.io/ReadersToolsDeploy](https://[your-username].github.io/ReadersToolsDeploy)
+[https://holymin10.github.io/ReadersToolsDeploy](https://holymin10.github.io/ReadersToolsDeploy)
 
 ## Technology Stack
 
@@ -40,7 +40,7 @@ This website is deployed using GitHub Pages and is accessible at:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/[your-username]/ReadersToolsDeploy.git
+   git clone https://github.com/holymin10/ReadersToolsDeploy.git
    cd ReadersToolsDeploy
    ```
 
