@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deployment and Implementation of Reader’s Tools | Senior Project</title>
+    <title>Deployment and Implementation of Reader's Tools | Senior Project</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
@@ -42,6 +42,100 @@
             color: #4f46e5; /* indigo-600 */
             border-bottom: 2px solid #4f46e5;
         }
+
+        /* Code block styling */
+        code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #1f2937;
+        }
+
+        pre {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Tech stack badge styling */
+        .tech-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #1e40af;
+            margin: 4px 4px 4px 0;
+        }
+
+        /* Timeline styling */
+        .timeline-item {
+            display: flex;
+            margin-bottom: 24px;
+        }
+
+        .timeline-dot {
+            width: 12px;
+            height: 12px;
+            background-color: #4f46e5;
+            border-radius: 50%;
+            margin-top: 6px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+        }
+
+        /* Feature grid styling */
+        .feature-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Responsive iframe container */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 62.5%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #f3f4f6;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased flex flex-col min-h-screen">
@@ -53,9 +147,12 @@
                 <div class="flex-shrink-0 flex items-center gap-2">
                     <span class="text-xl font-bold text-gray-900 serif">Reader's <span class="gradient-text">Tools</span></span>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center gap-6">
                     <a href="https://cs.calvin.edu" target="_blank" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition flex items-center gap-2">
-                        <i class="fas fa-university"></i> Calvin CS Department
+                        <i class="fas fa-university"></i> Calvin CS
+                    </a>
+                    <a href="https://ccel.org" target="_blank" class="text-sm font-medium text-gray-500 hover:text-indigo-600 transition flex items-center gap-2">
+                        <i class="fas fa-book"></i> CCEL.org
                     </a>
                 </div>
             </div>
@@ -69,10 +166,10 @@
                 Senior Project 2025
             </div>
             <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4 leading-tight serif">
-                Deployment and Implementation<br>of Reader’s Tools
+                Deployment and Implementation<br>of Reader's Tools
             </h1>
             <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                Transforming the Christian Classics Ethereal Library into a living conversation.
+                Transforming the Christian Classics Ethereal Library into a living conversation by integrating AI-powered reading assistance tools into the CCEL website.
             </p>
             <p class="text-md font-medium text-gray-800">
                 Directed by <span class="text-indigo-600">Professor Harry Plantinga</span>
@@ -93,6 +190,9 @@
                 <button onclick="switchTab('report')" class="nav-tab px-3 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap transition-colors" id="tab-btn-report">
                     Report
                 </button>
+                <button onclick="switchTab('implementation')" class="nav-tab px-3 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap transition-colors" id="tab-btn-implementation">
+                    Implementation
+                </button>
                 <button onclick="switchTab('presentation')" class="nav-tab px-3 py-4 text-sm font-medium text-gray-500 hover:text-gray-700 whitespace-nowrap transition-colors" id="tab-btn-presentation">
                     Presentation
                 </button>
@@ -110,13 +210,17 @@
         <div id="vision" class="tab-content active">
             <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
                 <h2 class="text-3xl font-bold text-gray-900 mb-8 serif border-l-4 border-indigo-600 pl-4">Project Vision</h2>
-                <div class="prose prose-lg text-gray-600">
-                    <p class="mb-6">
-                        Our vision starts with a simple problem: reading dense, 400-year-old theological texts is difficult, and it can be a very solitary experience. The CCEL website is an amazing resource, but it's currently a static collection of texts. Our vision is simple: <strong>'no one should have to feel lost or alone when reading a great book'</strong>.
+                <div class="space-y-6 text-gray-700">
+                    <p>
+                        Our vision starts with a simple problem: reading dense, 400-year-old theological texts is difficult, and it can be a very solitary experience. The CCEL website is an amazing resource, but it's currently a static collection of texts. Our vision is simple: <strong>"no one should have to feel lost or alone when reading a great book"</strong>.
                     </p>
-                    <p class="mb-6">
-                        We want to transform CCEL into a living conversation. Our project does this by integrating two distinct AI-powered systems. This creates a twofold technical challenge. First, for the contextual 'Reader's Tools'—the 'modernize' and 'explain' buttons—we have to port (or translate) its existing Python code directly into the website's native PHP. Second, for the 'Smart Library Assistant'—which runs the 'Ask CCEL a question' chatbot—we are building an API bridge to connect the PHP site to its separate Python service.
+                    <p>
+                        We want to transform CCEL into a living conversation. Our project does this by integrating two distinct AI-powered systems. This creates a twofold technical challenge:
                     </p>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>Reader's Tools</strong> — "Explain" and "Modernize" contextual buttons that help readers understand difficult passages on-the-fly</li>
+                        <li><strong>Smart Library Assistant (Chatbot)</strong> — "Ask CCEL a question" conversational interface powered by an external Python service</li>
+                    </ul>
                     <p>
                         By strictly integrating these features into the native CCEL environment, we aim to make profound theological study accessible to everyone, regardless of their academic background, creating a true "co-pilot" for digital reading.
                     </p>
@@ -132,26 +236,32 @@
                     <p class="text-gray-500 mt-2">Department of Computer Science, Calvin University</p>
                 </div>
                 
-                <div class="grid md:grid-cols-2 gap-8">
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
                     <!-- Member 1 -->
-                    <div class="bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition duration-300 border border-gray-100 text-center">
-                        <div class="h-20 w-20 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg">SC</div>
-                        <h3 class="text-xl font-bold text-gray-900">Sungmin Choi</h3>
-                        <p class="text-indigo-600 font-medium mb-4">Chatbot Lead</p>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Lead developer for the "Ask CCEL" Chatbot and API integration. Also working collaboratively on the implementation of the Contextual Menu system.
+                    <div class="bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition duration-300 border border-gray-100">
+                        <div class="h-24 w-24 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-4xl font-bold mb-4 shadow-lg">SC</div>
+                        <h3 class="text-xl font-bold text-gray-900 text-center">Sungmin Choi</h3>
+                        <p class="text-indigo-600 font-medium text-center mb-4">Chatbot & API Integration Lead</p>
+                        <p class="text-gray-600 text-sm leading-relaxed text-center">
+                            Lead developer for the "Ask CCEL" Chatbot and external SLA API integration. Also working collaboratively on security and rate limiting implementation.
                         </p>
                     </div>
     
                     <!-- Member 2 -->
-                    <div class="bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition duration-300 border border-gray-100 text-center">
-                        <div class="h-20 w-20 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-3xl font-bold mb-4 shadow-lg">YK</div>
-                        <h3 class="text-xl font-bold text-gray-900">Youngha Kweon</h3>
-                        <p class="text-indigo-600 font-medium mb-4">UI/UX & Frontend Lead</p>
-                        <p class="text-gray-600 text-sm leading-relaxed">
-                            Lead on UI/UX design and aesthetics. Spearheading the frontend implementation of the Contextual Menu and Reader's Tools interfaces.
+                    <div class="bg-white rounded-2xl shadow-sm p-8 hover:shadow-md transition duration-300 border border-gray-100">
+                        <div class="h-24 w-24 mx-auto rounded-full gradient-bg flex items-center justify-center text-white text-4xl font-bold mb-4 shadow-lg">YK</div>
+                        <h3 class="text-xl font-bold text-gray-900 text-center">Youngha Kweon</h3>
+                        <p class="text-indigo-600 font-medium text-center mb-4">UI/UX & Frontend Lead</p>
+                        <p class="text-gray-600 text-sm leading-relaxed text-center">
+                            Lead on UI/UX design and frontend implementation. Responsible for responsive design, streaming display, markdown rendering, and creating the complete 1500+ line reader-tools-integration.js application.
                         </p>
                     </div>
+                </div>
+
+                <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-6 text-center">
+                    <p class="text-sm text-gray-700">
+                        <strong>Advisor:</strong> Professor Harry Plantinga, Department of Computer Science
+                    </p>
                 </div>
             </div>
         </div>
@@ -160,77 +270,342 @@
         <div id="report" class="tab-content">
             <div class="max-w-4xl mx-auto">
                 <div class="flex items-center justify-between mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 serif">Mid-Semester Status Report</h2>
-                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-400">Milestone 3 Updated</span>
+                    <h2 class="text-3xl font-bold text-gray-900 serif">Final Project Report</h2>
+                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-green-400">Complete</span>
                 </div>
     
-                <div class="bg-white rounded-xl border border-gray-200 p-8 lg:p-12 prose prose-indigo max-w-none shadow-sm">
-                    <!-- Normative and Ethical Considerations -->
-                    <h3>Normative and Ethical Considerations</h3>
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <strong>Transparency & Data Privacy</strong>
-                            <p class="text-sm">We provide clear visual indicators that chat data is processed by a third party (SLA) and ensure all AI content is labeled with source citations to prevent hallucinations.</p>
+                <div class="bg-white rounded-xl border border-gray-200 p-8 lg:p-12 space-y-8 shadow-sm">
+                    <!-- Design Norms -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">Design Norms & Ethical Considerations</h3>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Transparency & Data Privacy</strong>
+                                <p class="text-sm text-gray-600 mt-2">We provide clear visual indicators that chat data is processed by an external service (SLA) and ensure all AI content is labeled with source citations to prevent hallucinations.</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Cultural Appropriateness</strong>
+                                <p class="text-sm text-gray-600 mt-2">The AI acts as an inquisitive guide, not an expert, enhancing the studious atmosphere rather than disrupting it with flashy features.</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Stewardship</strong>
+                                <p class="text-sm text-gray-600 mt-2">We balance features with costs by using efficient models (Claude 3.5 Sonnet) and lazy loading for the chatbot to minimize expensive API calls.</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Trust & Reliability</strong>
+                                <p class="text-sm text-gray-600 mt-2">Implementing rate limiting (50-200 req/hr), input validation, health checks, and comprehensive monitoring to maintain user trust.</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Security</strong>
+                                <p class="text-sm text-gray-600 mt-2">API keys stored server-side, CSRF tokens, XSS prevention, prompt injection detection, and per-user rate limiting.</p>
+                            </div>
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <strong class="text-gray-900">Accessibility</strong>
+                                <p class="text-sm text-gray-600 mt-2">Responsive design, keyboard navigation, semantic HTML, and clear error messages for all users.</p>
+                            </div>
                         </div>
-                        <div>
-                            <strong>Cultural Appropriateness</strong>
-                            <p class="text-sm">The AI acts as an inquisitive guide, not an expert, enhancing the studious atmosphere rather than disrupting it with flashy features.</p>
-                        </div>
-                        <div>
-                            <strong>Stewardship</strong>
-                            <p class="text-sm">We balance features with costs by using efficient models and lazy loading for the chatbot to minimize expensive API calls.</p>
-                        </div>
-                        <div>
-                            <strong>Trust</strong>
-                            <p class="text-sm">Prioritizing thorough testing and feedback mechanisms to maintain user trust in the platform's reliability.</p>
-                        </div>
-                    </div>
-                    
-                    <hr class="border-gray-100 my-8">
-    
+                    </section>
+
+                    <hr class="border-gray-200">
+
                     <!-- Accomplishments -->
-                    <h3>What We Did: Accomplishments to Date</h3>
-                    <p>We have successfully moved beyond planning into concrete implementation, integrating a dual-component system into the CCEL Laravel architecture.</p>
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">What We Accomplished</h3>
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-bold text-gray-900 text-lg">1. Backend Proxy Architecture</h4>
+                                <p class="text-gray-600 mt-2">Created <code>ReaderToolsProxyController.php</code> with complete API endpoint handling:</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-600 mt-2 space-y-1">
+                                    <li><code>proxyReaderTools()</code> - Routes explain/modernize/background requests to Claude</li>
+                                    <li><code>proxyChatbot()</code> - Handles chat requests to external SLA service</li>
+                                    <li><code>streamClaudeResponse()</code> - Converts Server-Sent Events to NDJSON for streaming</li>
+                                    <li><code>healthCheck()</code> - Fast health endpoints (~100-150ms response time)</li>
+                                    <li><code>checkRateLimit()</code> - Per-user rate limiting (50-200 req/hr)</li>
+                                    <li><code>sanitizeInput()</code> & <code>containsSuspiciousPatterns()</code> - Security layers</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-bold text-gray-900 text-lg">2. Complete Frontend Application (1500+ Lines)</h4>
+                                <p class="text-gray-600 mt-2">Implemented <code>reader-tools-integration.js</code> with:</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-600 mt-2 space-y-1">
+                                    <li>Persistent sidebar (500px fixed width, slides in from right)</li>
+                                    <li>Two tabs: Reader Tools (Explain/Modernize/Background) and Chatbot (conversational)</li>
+                                    <li>Real-time streaming with markdown rendering</li>
+                                    <li>Session persistence with localStorage</li>
+                                    <li>Complete markdown-to-HTML converter with proper formatting</li>
+                                    <li>Error handling, loading states, and user feedback</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-bold text-gray-900 text-lg">3. Security Implementation</h4>
+                                <p class="text-gray-600 mt-2">Comprehensive security measures:</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-600 mt-2 space-y-1">
+                                    <li>API keys never exposed to client (server-side only)</li>
+                                    <li>Rate limiting per-user with configurable limits</li>
+                                    <li>Input validation and prompt injection detection</li>
+                                    <li>CSRF token protection on all forms</li>
+                                    <li>XSS prevention through HTML escaping</li>
+                                    <li>HTTP 429 responses with Retry-After headers</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-bold text-gray-900 text-lg">4. Monitoring & Health Checks</h4>
+                                <p class="text-gray-600 mt-2">Created infrastructure monitoring:</p>
+                                <ul class="list-disc pl-5 text-sm text-gray-600 mt-2 space-y-1">
+                                    <li>Lightweight health endpoints (not full API calls)</li>
+                                    <li>Public status monitor dashboard with real-time color coding</li>
+                                    <li>Response time tracking and auto-refresh</li>
+                                    <li>Admin abuse monitoring capabilities</li>
+                                </ul>
+                            </div>
+
+                            <div class="border-l-4 border-indigo-500 pl-4">
+                                <h4 class="font-bold text-gray-900 text-lg">5. Zero Database Changes</h4>
+                                <p class="text-gray-600 mt-2">All features implemented without modifying database schema. Stateless proxy design means no persistent storage of AI interactions.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <hr class="border-gray-200">
+
+                    <!-- Technical Architecture -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">Technical Architecture</h3>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-6">
+                            <h4 class="font-bold text-gray-900 mb-4">API Endpoints Implemented</h4>
+                            <div class="space-y-3 text-sm font-mono bg-white p-4 rounded border border-gray-300 overflow-x-auto">
+                                <div><span class="text-green-600">GET</span> <code>/api/reader-tools/proxy?tool=explain&text=...</code></div>
+                                <div><span class="text-green-600">GET</span> <code>/api/chatbot/proxy?message=...</code></div>
+                                <div><span class="text-blue-600">GET</span> <code>/api/health/reader-tools</code></div>
+                                <div><span class="text-blue-600">GET</span> <code>/api/health/chatbot</code></div>
+                                <div><span class="text-green-600">GET</span> <code>/user/{uid}/status</code></div>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                            <h4 class="font-bold text-gray-900 mb-4">Streaming Pipeline</h4>
+                            <p class="text-sm text-gray-600 mb-3">Real-time responses using Server-Sent Events (SSE):</p>
+                            <ol class="list-decimal pl-5 text-sm text-gray-600 space-y-2">
+                                <li>Client sends request to PHP proxy endpoint</li>
+                                <li>PHP calls external API (Claude or SLA) with streaming enabled</li>
+                                <li>Server receives SSE chunks and parses line-by-line</li>
+                                <li>Converts SSE format to NDJSON (newline-delimited JSON)</li>
+                                <li>Sends streamed data to client with event-stream headers</li>
+                                <li>JavaScript accumulates raw text and renders markdown once complete</li>
+                                <li>User sees real-time typing effect with proper formatting</li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <hr class="border-gray-200">
+
+                    <!-- Testing & Validation -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">Testing & Validation</h3>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <p class="font-semibold text-green-900 mb-2">✓ Health Checks</p>
+                                <p class="text-sm text-green-800">Verified response times: 101-117ms (vs. 2200-8820ms for full API calls)</p>
+                            </div>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <p class="font-semibold text-green-900 mb-2">✓ Streaming Format</p>
+                                <p class="text-sm text-green-800">NDJSON format verified with curl; real-time display working</p>
+                            </div>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <p class="font-semibold text-green-900 mb-2">✓ Rate Limiting</p>
+                                <p class="text-sm text-green-800">HTTP 429 responses with Retry-After headers; per-user tracking confirmed</p>
+                            </div>
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <p class="font-semibold text-green-900 mb-2">✓ Markdown Rendering</p>
+                                <p class="text-sm text-green-800">Bold, italic, headers, lists all rendering correctly</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <hr class="border-gray-200">
+
+                    <!-- Key Decisions -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">Key Technical Decisions</h3>
+                        <div class="space-y-4">
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-gray-900">Server-Side Proxy Pattern</h4>
+                                <p class="text-sm text-gray-600 mt-1">All API calls routed through PHP backend to keep keys secure, enable rate limiting, and provide abuse monitoring.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-gray-900">SSE to NDJSON Conversion</h4>
+                                <p class="text-sm text-gray-600 mt-1">Chose NDJSON over raw SSE for easier client-side parsing and compatibility with different streaming sources.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-gray-900">Vanilla JavaScript (No Frameworks)</h4>
+                                <p class="text-sm text-gray-600 mt-1">1500+ line pure JS implementation avoids large dependencies and keeps bundle size minimal.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-gray-900">Laravel Cache for Rate Limiting</h4>
+                                <p class="text-sm text-gray-600 mt-1">Leveraged existing Laravel infrastructure (Redis/file-based) for fast, distributed rate limit tracking.</p>
+                            </div>
+                            <div class="border-l-4 border-purple-500 pl-4">
+                                <h4 class="font-bold text-gray-900">Purple Gradient Theme</h4>
+                                <p class="text-sm text-gray-600 mt-1">Consistent visual branding across all UI elements (#667eea to #764ba2) for cohesive user experience.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <hr class="border-gray-200">
+
+                    <!-- Future Work -->
+                    <section>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6 serif">Future Enhancements</h3>
+                        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                            <li><strong>Historical Tracking:</strong> Store user queries and responses for personalized recommendations</li>
+                            <li><strong>Automated Alerts:</strong> Admin notifications for abuse patterns or API failures</li>
+                            <li><strong>Admin Dashboard:</strong> Comprehensive usage analytics, cost tracking, and user behavior analysis</li>
+                            <li><strong>Caching Layer:</strong> Redis caching for frequently asked questions to reduce API costs</li>
+                            <li><strong>Discussion Forum:</strong> AI-powered book discussion prompts to foster community interaction</li>
+                            <li><strong>Cross-Reference Maps:</strong> AI-generated concept maps connecting ideas across library books</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPLEMENTATION TAB -->
+        <div id="implementation" class="tab-content">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 serif">Implementation Details</h2>
+                
+                <!-- Files Created -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8 mb-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Files Created & Modified</h3>
                     
                     <div class="space-y-6">
-                        <div class="border-l-4 border-indigo-500 pl-4">
-                            <h4 class="font-bold text-gray-900 m-0">1. Initial UI/UX Integration</h4>
-                            <p class="mt-2">We implemented a persistent <strong>floating chatbot icon</strong> and a <strong>contextual popup menu</strong> that appears when users highlight text. These serve as entry points for the "Ask CCEL" and "Reader's Tools" features.</p>
+                        <!-- Backend Files -->
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2">
+                                <i class="fas fa-server text-indigo-600"></i> Backend (PHP)
+                            </h4>
+                            <div class="space-y-3 ml-5">
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>ReaderToolsProxyController.php</code></p>
+                                    <p class="text-sm text-gray-600 mt-1">Main proxy controller (~400 lines) handling all API requests, streaming, rate limiting, and security</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>PublicStatusController.php</code></p>
+                                    <p class="text-sm text-gray-600 mt-1">Serves the public status monitor dashboard with health check integration</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>RateLimitChatbot.php</code></p>
+                                    <p class="text-sm text-gray-600 mt-1">Middleware for rate limiting (60 lines, integrated into controller)</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>AbuseMonitoringController.php</code></p>
+                                    <p class="text-sm text-gray-600 mt-1">Admin dashboard for tracking suspicious activity and API usage patterns</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>routes/web.php</code> (updated)</p>
+                                    <p class="text-sm text-gray-600 mt-1">5 new routes for API endpoints and public status page</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="border-l-4 border-indigo-500 pl-4">
-                            <h4 class="font-bold text-gray-900 m-0">2. API Endpoint Discovery & Integration</h4>
-                            <p class="mt-2">We reverse-engineered the existing SLA (Smart Library Assistant) API endpoints to enable session creation (<code>/api/query-agent-sessions</code>) and message sending (<code>/api/query-agent</code>) directly from our PHP frontend via JavaScript, handling secure CORS communication.</p>
+
+                        <!-- Frontend Files -->
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-900 mb-3 flex items-center gap-2">
+                                <i class="fas fa-code text-yellow-500"></i> Frontend (JavaScript)
+                            </h4>
+                            <div class="space-y-3 ml-5">
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>public/js/reader-tools-integration.js</code></p>
+                                    <p class="text-sm text-gray-600 mt-1">Complete application (1500+ lines) with sidebar UI, streaming handlers, markdown conversion, and session management</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>resources/views/UserStatus.blade.php</code> (updated)</p>
+                                    <p class="text-sm text-gray-600 mt-1">Status monitor dashboard with health check integration and back button</p>
+                                </div>
+                                <div class="border-l-2 border-gray-300 pl-4">
+                                    <p class="font-semibold text-gray-900"><code>resources/views/GlobalChatbot.blade.php</code> (updated)</p>
+                                    <p class="text-sm text-gray-600 mt-1">Global chatbot entry point included on all pages</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="border-l-4 border-indigo-500 pl-4">
-                            <h4 class="font-bold text-gray-900 m-0">3. Visual System Implementation</h4>
-                            <p class="mt-2">We created a comprehensive styling system using gradient buttons (<code>linear-gradient(135deg, #667eea 0%, #764ba2 100%)</code>) and proper Markdown rendering for AI responses to match CCEL branding.</p>
+                    </div>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8 mb-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Technology Stack</h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fab fa-laravel text-red-600 text-2xl"></i>
+                                <h4 class="font-bold">Laravel 5.x</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Framework base with routing, middleware, caching, and logging</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fab fa-php text-purple-600 text-2xl"></i>
+                                <h4 class="font-bold">PHP 8.3+</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Server-side proxy logic, API integration, and security</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fab fa-js text-yellow-500 text-2xl"></i>
+                                <h4 class="font-bold">Vanilla JavaScript</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Frontend application without framework dependencies</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fab fa-python text-blue-600 text-2xl"></i>
+                                <h4 class="font-bold">Python Service</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">External SLA Query Agent and AI endpoints</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fas fa-server text-gray-600 text-2xl"></i>
+                                <h4 class="font-bold">Claude API</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Anthropic AI for Reader Tools (explain/modernize)</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i class="fas fa-lock text-green-600 text-2xl"></i>
+                                <h4 class="font-bold">Redis/Cache</h4>
+                            </div>
+                            <p class="text-sm text-gray-600">Rate limiting and session storage</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rate Limiting Details -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Rate Limiting Strategy</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h4 class="font-bold text-blue-900 mb-3">Reader Tools</h4>
+                            <p class="text-sm text-blue-800 mb-2"><strong>Limit:</strong> 200 requests/hour per user</p>
+                            <p class="text-sm text-blue-800"><strong>Rationale:</strong> Lower frequency, quick processing (explain/modernize)</p>
+                        </div>
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <h4 class="font-bold text-purple-900 mb-3">Chatbot</h4>
+                            <p class="text-sm text-purple-800 mb-2"><strong>Limit:</strong> 50 requests/hour per user</p>
+                            <p class="text-sm text-purple-800"><strong>Rationale:</strong> Conversational nature; prevents abuse of expensive API calls</p>
                         </div>
                     </div>
 
-                    <hr class="border-gray-100 my-8">
-
-                    <!-- Process & Timeline -->
-                    <h3>Development Process & Timeline</h3>
-                    <p><strong>The Technical Pivot:</strong> We split our approach: Porting the "Reader's Tools" backend directly to PHP for speed, while using an API Bridge for the conversational chatbot.</p>
-                    
-                    <ul class="list-disc pl-5 mt-4 text-sm">
-                        <li><strong>Nov 1:</strong> Frontend components implemented (Completed).</li>
-                        <li><strong>Dec 10:</strong> At least one system (Chatbot or Reader Tools) fully stable on the website.</li>
-                        <li><strong>Mar 1:</strong> Full implementation complete; decision on "Possible" goals (Discussion Forum).</li>
-                    </ul>
-
-                    <p class="mt-6"><strong>Dev Environment:</strong> Fully set up with PHP, Python, and React dependencies on university servers.</p>
-                    <p><strong>Team Contract:</strong> Established norms for Slack communication, pair-programming (Tuesdays), and Git workflow.</p>
-
-                    <hr class="border-gray-100 my-8">
-    
-                    <!-- Success Criteria -->
-                    <h3>Product Success Criteria</h3>
-                    <ul class="list-disc pl-5 space-y-2">
-                        <li><strong>Minimum:</strong> Fully functional "Ask CCEL" chatbot via API, and "Modernize/Explain" buttons fully ported to native PHP.</li>
-                        <li><strong>Possible:</strong> AI-driven book discussion prompts to foster community interaction.</li>
-                        <li><strong>Stretch:</strong> AI-generated cross-reference maps connecting concepts across library books.</li>
-                    </ul>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mt-6">
+                        <p class="text-sm text-gray-700"><strong>User Identification:</strong> Priority order — Authenticated user ID → Session ID → Anonymous (IP-based)</p>
+                        <p class="text-sm text-gray-700 mt-2"><strong>Storage:</strong> Laravel Cache system (Redis in production, file-based in development)</p>
+                        <p class="text-sm text-gray-700 mt-2"><strong>Response:</strong> HTTP 429 with Retry-After header when exceeded</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,120 +613,250 @@
         <!-- PRESENTATION TAB -->
         <div id="presentation" class="tab-content">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl font-bold mb-10 serif text-center">Status Report Presentation (5-Minute)</h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Slide 1: Title -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-indigo-500 rounded text-xs font-bold">SLIDE 1</span>
-                            <h3 class="text-lg font-bold">Title</h3>
-                        </div>
-                        <p class="text-gray-300 text-sm">
-                            <strong>Project:</strong> Deployment and Implementation of Reader's Tools<br>
-                            <strong>Team:</strong> Sungmin Choi & Youngha Kweon<br>
-                            <strong>Context:</strong> Senior Project Mid-Semester Status Report
-                        </p>
-                    </div>
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-3xl font-bold text-gray-900 serif">Complete Presentation</h2>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded border border-blue-400">Google Slides</span>
+                </div>
 
-                    <!-- Slide 2: Vision -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-indigo-500 rounded text-xs font-bold">SLIDE 2</span>
-                            <h3 class="text-lg font-bold">The Vision</h3>
-                        </div>
-                        <p class="text-gray-300 text-sm mb-2">"No one should have to feel lost or alone when reading a great book."</p>
-                        <p class="text-gray-400 text-xs"><strong>Twofold Challenge:</strong><br>1. Reader's Tools: Porting Python code to native PHP.<br>2. Chatbot: Building an API bridge.</p>
-                    </div>
-
-                    <!-- Slide 3: Accomplishments -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-indigo-500 rounded text-xs font-bold">SLIDE 3</span>
-                            <h3 class="text-lg font-bold">Accomplishments</h3>
-                        </div>
-                        <ul class="text-gray-300 text-sm list-disc pl-4">
-                            <li>Established shared dev environment & Team Contract.</li>
-                            <li>Implemented <strong>Floating Chatbot Icon</strong> (API entry point).</li>
-                            <li>Implemented <strong>Contextual Menu</strong> (Reader's Tools entry point).</li>
-                        </ul>
-                    </div>
-
-                    <!-- Slide 4: Design Norms -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-indigo-500 rounded text-xs font-bold">SLIDE 4</span>
-                            <h3 class="text-lg font-bold">Design Norms</h3>
-                        </div>
-                        <ul class="text-gray-300 text-sm list-disc pl-4">
-                            <li><strong>Aesthetics:</strong> Visual integration to build trust.</li>
-                            <li><strong>Transparency:</strong> Clear labeling & citations to mitigate hallucinations.</li>
-                            <li><strong>Stewardship:</strong> Balancing features with API costs.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Slide 5: Demo -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-indigo-500 rounded text-xs font-bold">SLIDE 5</span>
-                            <h3 class="text-lg font-bold">Live Demo</h3>
-                        </div>
-                        <p class="text-gray-300 text-sm">Demonstration of the live development site, showcasing the floating icon and text-selection menu.</p>
-                    </div>
-
-                    <!-- Slide 6: Next Steps -->
-                    <div class="bg-gray-800 text-white p-6 rounded-xl border border-gray-700 shadow-lg">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="px-2 py-1 bg-purple-500 rounded text-xs font-bold">SLIDE 6</span>
-                            <h3 class="text-lg font-bold">Next Steps</h3>
-                        </div>
-                        <ul class="text-gray-300 text-sm list-disc pl-4">
-                            <li><strong>Goal 1:</strong> Port "Reader's Tools" backend to PHP.</li>
-                            <li><strong>Goal 2:</strong> Finalize Chatbot API Bridge.</li>
-                            <li><strong>Target:</strong> One system fully stable by Dec 10th.</li>
-                        </ul>
+                <!-- Embedded Presentation -->
+                <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-8">
+                    <div class="iframe-container">
+                        <iframe 
+                            src="https://docs.google.com/presentation/d/19W7LvlIvLIpq2iKXe1ZFcAKVmWR1kUUY/embed?start=false&loop=false&delayms=3000" 
+                            frameborder="0" 
+                            allowfullscreen="true" 
+                            mozallowfullscreen="true" 
+                            webkitallowfullscreen="true">
+                        </iframe>
                     </div>
                 </div>
-    
-                <div class="mt-12 text-center p-8 bg-gray-100 rounded-xl border-dashed border-2 border-gray-300">
-                    <i class="fas fa-file-powerpoint text-4xl text-gray-400 mb-3"></i>
-                    <p class="text-gray-500 font-medium">Full Presentation Slides</p>
-                    <a href="#" class="mt-2 inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-800 font-semibold transition">
-                        Download PDF <i class="fas fa-download"></i>
+
+                <!-- Quick Links -->
+                <div class="grid md:grid-cols-2 gap-4 mb-12">
+                    <a href="https://docs.google.com/presentation/d/19W7LvlIvLIpq2iKXe1ZFcAKVmWR1kUUY/edit?usp=sharing" target="_blank" class="flex items-center justify-center gap-3 p-6 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition shadow-sm">
+                        <i class="fab fa-google text-blue-600 text-2xl"></i>
+                        <div>
+                            <p class="text-gray-900 font-semibold">Edit on Google Slides</p>
+                            <p class="text-sm text-gray-600">Full editing access</p>
+                        </div>
                     </a>
+                    <a href="https://docs.google.com/presentation/d/19W7LvlIvLIpq2iKXe1ZFcAKVmWR1kUUY/export/pdf" target="_blank" class="flex items-center justify-center gap-3 p-6 bg-red-50 border border-red-200 rounded-lg hover:bg-red-100 transition shadow-sm">
+                        <i class="fas fa-file-pdf text-red-600 text-2xl"></i>
+                        <div>
+                            <p class="text-gray-900 font-semibold">Download as PDF</p>
+                            <p class="text-sm text-gray-600">For offline viewing</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Summary of Slides -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Presentation Overview</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">1</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Title & Overview</h4>
+                                <p class="text-sm text-gray-600 mt-1">Introduction to the Reader's Tools project, team members, and advisor</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">2</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">The Problem & Vision</h4>
+                                <p class="text-sm text-gray-600 mt-1">"No one should feel lost when reading a great book" - transforming CCEL from static to interactive</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">3</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Two Systems Integrated</h4>
+                                <p class="text-sm text-gray-600 mt-1">Reader's Tools (Explain/Modernize/Background) and Smart Library Assistant (Chatbot)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">4</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Key Accomplishments</h4>
+                                <p class="text-sm text-gray-600 mt-1">1500+ line JavaScript frontend, secure proxy, health checks, rate limiting, and zero database changes</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">5</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Design Principles</h4>
+                                <p class="text-sm text-gray-600 mt-1">Transparency, Trust, Stewardship, Accessibility, and Security integrated throughout</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">6</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Live Demonstration</h4>
+                                <p class="text-sm text-gray-600 mt-1">Walk-through of floating chatbot icon, text selection menu, real-time responses, and status dashboard</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">7</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Technical Stack</h4>
+                                <p class="text-sm text-gray-600 mt-1">PHP/Laravel backend, vanilla JavaScript frontend, Claude API, and Server-Sent Events streaming</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-600 text-white font-bold text-sm">8</div>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Next Steps & Future Work</h4>
+                                <p class="text-sm text-gray-600 mt-1">Production deployment, automated alerts, analytics dashboard, and community features</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- CODE TAB -->
         <div id="code" class="tab-content">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-gray-900 mb-8 serif">Project Codebase</h2>
-                <p class="text-lg text-gray-600 mb-12">
-                    Our project integrates modern AI microservices into a legacy PHP/Laravel architecture.
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8 serif text-center">Project Codebase</h2>
+                <p class="text-lg text-gray-600 mb-12 text-center">
+                    Our project integrates modern AI microservices into a legacy PHP/Laravel architecture with comprehensive security and monitoring.
                 </p>
                 
                 <div class="grid md:grid-cols-3 gap-6 mb-12">
-                    <div class="px-6 py-6 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="feature-card">
                         <i class="fab fa-php text-indigo-600 text-4xl mb-4"></i>
-                        <h4 class="font-bold text-lg">Laravel/PHP</h4>
-                        <p class="text-sm text-gray-500 mt-2">Core Website Logic & Backend Porting</p>
+                        <h4 class="font-bold text-lg text-gray-900">Laravel/PHP</h4>
+                        <p class="text-sm text-gray-600 mt-2">Core website, proxy controller, rate limiting, and backend logic</p>
                     </div>
-                    <div class="px-6 py-6 bg-white rounded-xl shadow-sm border border-gray-200">
+                    <div class="feature-card">
                         <i class="fab fa-js text-yellow-500 text-4xl mb-4"></i>
-                        <h4 class="font-bold text-lg">JavaScript ES6</h4>
-                        <p class="text-sm text-gray-500 mt-2">API Bridge, AJAX & Dynamic UI</p>
+                        <h4 class="font-bold text-lg text-gray-900">JavaScript ES6</h4>
+                        <p class="text-sm text-gray-600 mt-2">1500+ line frontend application with streaming and UI</p>
                     </div>
-                    <div class="px-6 py-6 bg-white rounded-xl shadow-sm border border-gray-200">
-                        <i class="fab fa-python text-blue-500 text-4xl mb-4"></i>
-                        <h4 class="font-bold text-lg">Python</h4>
-                        <p class="text-sm text-gray-500 mt-2">Existing AI Logic & API Endpoints</p>
+                    <div class="feature-card">
+                        <i class="fab fa-python text-blue-600 text-4xl mb-4"></i>
+                        <h4 class="font-bold text-lg text-gray-900">Python</h4>
+                        <p class="text-sm text-gray-600 mt-2">External SLA service and existing AI logic</p>
                     </div>
                 </div>
+
+                <!-- Code Examples Section -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8 mb-8 shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-indigo-600 pl-4">Code Highlights</h3>
+
+                    <!-- Rate Limiting Example -->
+                    <div class="mb-8">
+                        <h4 class="font-bold text-gray-900 mb-3">Rate Limiting Implementation</h4>
+                        <pre><code>// In ReaderToolsProxyController.php
+public function checkRateLimit($service) {
+    $userId = Auth::check() ? Auth::id() : 
+              (session()->getId() ?: request()->ip());
     
-                <a href="https://github.com/holymin10/ccel-ai-reading-assistant" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-gray-900 hover:bg-gray-800 transition shadow-lg transform hover:-translate-y-1">
-                    <i class="fab fa-github mr-2"></i> View Repository on GitHub
-                </a>
+    $limit = $service === 'chatbot' ? 50 : 200;
+    $key = "rate_limit:{$service}:{$userId}";
+    
+    $current = Cache::get($key, 0);
+    if ($current >= $limit) {
+        return response()->json(
+            ['error' => 'Rate limit exceeded'],
+            429
+        )->header('Retry-After', '3600');
+    }
+    
+    Cache::put($key, $current + 1, now()->addHour());
+}
+</code></pre>
+                    </div>
+
+                    <!-- Streaming Example -->
+                    <div class="mb-8">
+                        <h4 class="font-bold text-gray-900 mb-3">Server-Sent Events Streaming</h4>
+                        <pre><code>// Stream Claude response as NDJSON
+private function streamClaudeResponse($stream) {
+    $allRawText = '';
+    
+    foreach ($stream->getIterator() as $chunk) {
+        $lines = explode("\n", $chunk);
+        
+        foreach ($lines as $line) {
+            $parsed = $this->parseSSEChunk($line);
+            if ($parsed) {
+                $allRawText .= $parsed['text'];
+                echo json_encode([
+                    'type' => 'chunk',
+                    'text' => $parsed['text']
+                ]) . "\n";
+            }
+        }
+    }
+    
+    // Emit complete event
+    echo json_encode([
+        'type' => 'complete',
+        'fullText' => $allRawText
+    ]) . "\n";
+}
+</code></pre>
+                    </div>
+
+                    <!-- Input Validation Example -->
+                    <div>
+                        <h4 class="font-bold text-gray-900 mb-3">Security: Prompt Injection Detection</h4>
+                        <pre><code>// Detect suspicious patterns
+private function containsSuspiciousPatterns($input) {
+    $patterns = [
+        '/system\s*prompt/i',
+        '/ignore.*instructions/i',
+        '/forget.*previous/i',
+        '/execute.*code/i',
+        '/\{.*\{.*\}/i',  // Nested braces
+    ];
+    
+    foreach ($patterns as $pattern) {
+        if (preg_match($pattern, $input)) {
+            Log::warning('Suspicious pattern detected', 
+                ['input' => substr($input, 0, 100)]);
+            return true;
+        }
+    }
+    
+    return false;
+}
+</code></pre>
+                    </div>
+                </div>
+
+                <!-- Repository Link -->
+                <div class="text-center">
+                    <a href="https://github.com/holymin10/ccel-ai-reading-assistant" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-lg text-white bg-gray-900 hover:bg-gray-800 transition shadow-lg transform hover:-translate-y-1">
+                        <i class="fab fa-github mr-2"></i> View Full Repository on GitHub
+                    </a>
+                    <p class="text-sm text-gray-500 mt-4">All source code available with full commit history and documentation</p>
+                </div>
             </div>
         </div>
 
@@ -360,10 +865,11 @@
     <!-- Footer -->
     <footer class="bg-white border-t border-gray-200 py-8 mt-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:flex md:justify-between md:items-center">
-            <p class="text-sm text-gray-500">&copy; 2025 CCEL Reader's Tools Project.</p>
+            <p class="text-sm text-gray-500">&copy; 2025 CCEL Reader's Tools Project. All rights reserved.</p>
             <div class="flex justify-center space-x-6 mt-4 md:mt-0">
                 <a href="https://cs.calvin.edu" class="text-gray-400 hover:text-indigo-600 transition">Calvin CS</a>
                 <a href="https://ccel.org" class="text-gray-400 hover:text-indigo-600 transition">CCEL.org</a>
+                <a href="https://github.com/holymin10/ccel-ai-reading-assistant" class="text-gray-400 hover:text-indigo-600 transition">GitHub</a>
             </div>
         </div>
     </footer>
